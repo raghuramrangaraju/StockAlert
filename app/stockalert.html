@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Stock Alert</title>
+		<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+				</head>
+				<body style="backgroud:transparent">
+
+					
+					<div class="container">
+						<br>
+							<br>
+								<br>
+									<div class="row">
+										<div class="col-lg-12" style="background:black">
+											<center>
+											<span style="color:white"><b>	<h1> Stock Alert</h1></b> </span>
+											</center>
+										</div>
+									</div>
+											<br>
+										<div class="row col-lg-12">
+											<div class="col-lg-2 ">
+												<b>	Akamai </b>
+											</div>
+												<div class="col-lg-2 ">
+												<b>	Lower :</b>
+											</div>
+											<div class="col-lg-3">
+											<input type="text" name="Akamai" id="LowerAkamai" class="form-control"/> 
+											</div>
+												<div class="col-lg-2 ">
+												<b>	Higher :</b>
+											</div>
+												<div class="col-lg-3">
+											 <input type="text" name="Akamai" id="HigherAkamai" class="form-control"/> 
+											</div>
+											
+										</div>
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>LastPrice</th>
+													<th>Change</th>
+													<th>ChangePercent</th>
+													<th>Time</th>
+													<th>Volume</th>
+													<th>High</th>
+													<th>Low</th>
+													<th>Open</th>
+													
+												</tr>
+											</thead>
+											<tbody id="tbody">
+										
+											</tbody>								
+										</table>
+								</div>
+								<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+								<script>
+							$(document).ready(function(){
+								
+								 setInterval(
+									function(){ 
+			 							$.ajax({
+										  url: "http://dev.markitondemand.com/MODApis/Api/v2/Quote/jsonp?symbol=AKAM",
+									  dataType: 'jsonp',
+										  success: function(resultData) { 
+											  debugger;
+											  $("#tbody").empty();
+											  var Name = resultData.Name;
+											  var LastPrice = resultData.LastPrice;
+											  var Change = resultData.Change;
+											  var ChangePercent = resultData.ChangePercent;
+											  var Timestamp = resultData.Timestamp;
+											  var Volume = resultData.Volume;
+											  var High = resultData.High;
+											  var Low = resultData.Low;
+											  var Open = resultData.Open;
+											  var HigherAkamai =parseFloat($("#HigherAkamai").val());
+											  var LowerAkamai = parseFloat($("#LowerAkamai").val());
+											  if(isNaN(HigherAkamai) == false && isNaN(LowerAkamai) == false){												 
+											  if(HigherAkamai < High ){
+												  
+											  }	
+											   if(LowerAkamai < Low ){
+												  
+											  }		  
+										  	}
+											  $("#tbody").append("<tr><td>"+Name+"</td><td>"+LastPrice+"</td><td>"+Change+"</td><td>"+ChangePercent+"</td><td>"+Timestamp+"</td><td>"+Volume+"</td><td>"+High+"</td><td>"+Low+"</td><td>"+Open+"</td> </tr>")
+											  
+										  },
+										 error: function(value) 
+										 { 
+												debugger;
+											 alert("Something went wrong"+ value); 
+										 }
+									});		
+ 									},1000);					  
+											
+							});
+
+							function sendmail(){
+									$.ajax({
+									type:"POST",
+									data:{'subject':""},
+								        url: "http://dev.markitondemand.com/MODApis/Api/v2/Quote/jsonp?symbol=AKAM",
+								        dataType: 'jsonp',
+										  success: function(resultData) { 
+											  debugger;
+										  },
+										 error: function(value) 
+										 { 
+												debugger;
+											 alert("Something went wrong"+ value); 
+										 }
+									});
+
+							}
+
+							</script>
+							<script>
+								
+	</script>
+	</body>
+</html>
+
