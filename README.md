@@ -1,5 +1,5 @@
 # StockAlert
-Developed an web app to track real-time stock values. The app will throw an alert if the stock value reaches threshold level.
+Developed a web app to track real-time stock values. The app will throw an alert if the stock value reaches the threshold level.
 
 ### Screen shots
 
